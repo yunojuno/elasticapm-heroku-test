@@ -12,22 +12,23 @@
             "required": true
         },
         "SECRET_KEY": {
+            "description": "The SECRET_KEY used by Django. Automatically generated.",
             "generator": "secret"
         },
-        "ELASTIC_APM_SERVICE_URL": {
-            "description": "See https://www.elastic.co/guide/en/apm/agent/python/current/django-support.html",
+        "ELASTIC_APM_SERVER_URL": {
+            "description": "The URL for your APM Server. See https://www.elastic.co/guide/en/apm/agent/python/current/configuration.html#config-server-url.",
             "required": true
         },
         "ELASTIC_APM_SERVICE_NAME": {
-            "description": "See https://www.elastic.co/guide/en/apm/agent/python/current/django-support.html",
+            "description": "The name of your service. See https://www.elastic.co/guide/en/apm/agent/python/current/configuration.html#config-service-name.",
             "required": true
         },
         "ELASTIC_APM_SECRET_TOKEN": {
-            "description": "See https://www.elastic.co/guide/en/apm/agent/python/current/django-support.html",
+            "description": "Available from your APM configuration. See https://www.elastic.co/guide/en/apm/agent/python/current/configuration.html#config-secret-token",
             "required": true
         },
         "ELASTIC_APM_ENVIRONMENT": {
-            "description": "See https://www.elastic.co/guide/en/apm/agent/python/current/django-support.html",
+            "description": "The name of the environment this service is deployed in, e.g. 'production' or 'staging'. See https://www.elastic.co/guide/en/apm/agent/python/current/configuration.html#config-environment",
             "required": true
         }
     },
