@@ -1,22 +1,32 @@
+import os
 from os import path
 
-DEBUG = True
-TEMPLATE_DEBUG = True
 USE_TZ = True
+
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+
+PROJECT_DIR = path.abspath(path.join(path.dirname(__file__)))
+
+ROOT_URLCONF = "demo.urls"
+
+ALLOWED_HOSTS = ["*"]
 
 DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": "demo.db"}}
 
 INSTALLED_APPS = (
-    "django.contrib.admin",
-    "django.contrib.auth",
     "django.contrib.contenttypes",
+    "django.contrib.auth",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "my_app",
+    "django.contrib.admin",
+    "elasticapm.contrib.django",
+    "demo",
 )
 
 MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     # default django middleware
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -24,8 +34,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
 ]
-
-PROJECT_DIR = path.abspath(path.join(path.dirname(__file__)))
 
 TEMPLATES = [
     {
@@ -42,9 +50,9 @@ TEMPLATES = [
     }
 ]
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_URL = "/static/"
-
-SECRET_KEY = "secret"  # noqa: S105
+STATIC_ROOT = os.path.join(PROJECT_DIR, "../", "staticfiles")  # noqa
 
 LOGGING = {
     "version": 1,
@@ -67,7 +75,15 @@ LOGGING = {
     },
 }
 
-ROOT_URLCONF = "demo.urls"
+TEMPLATE_DEBUG = DEBUG = bool(os.getenv("DJANGO_DEBUG", 0))
 
-if not DEBUG:
-    raise Exception("This settings file can only be used with DEBUG=True")
+# === ELASTIC_APM settings ===
+
+ELASTIC_APM = {
+    "SERVICE_URL": os.getenv("ELASTIC_APM_SERVER_URL"),
+    "SERVICE_NAME": os.getenv("ELASTIC_APM_SERVICE_NAME"),
+    "SECRET_TOKEN": os.getenv("ELASTIC_APM_SECRET_TOKEN"),
+    "ENVIRONMENT": os.getenv("ELASTIC_APM_ENVIRONMENT"),
+    "DEBUG": True,
+}
+ELASTIC_APM_ENABLED = all(ELASTIC_APM.values())

@@ -2,8 +2,10 @@
 *.egg-info
 *.bak
 .coverage
+.env
 .tox
 .venv
 node_modules
 # poetry.lock
 test.db
+staticfiles

@@ -1,7 +1,7 @@
 {
-    "name": "Heroku + Poetry + Django",
-    "description": "An empty Django app to test Heroku deployment issues.",
-    "repository": "https://github.com/yunojuno/heroku-poetry-template",
+    "name": "Heroku + Django + Elastic APM",
+    "description": "An empty Django app to Elastic APM integration.",
+    "repository": "https://github.com/yunojuno/elasticapm-heroku-test",
     "scripts": {
         "postdeploy": "python manage.py migrate"
     },
@@ -14,48 +14,21 @@
         "SECRET_KEY": {
             "generator": "secret"
         },
-        "APPNAME": {
-            "description": "See https://docs.datadoghq.com/agent/basic_agent_usage/heroku/",
+        "ELASTIC_APM_SERVICE_URL": {
+            "description": "See https://www.elastic.co/guide/en/apm/agent/python/current/django-support.html",
             "required": true
         },
-        "DD_SERVICE": {
-            "description": "See https://app.datadoghq.com/apm/docs?architecture=host-based&language=python",
-            "value": "website",
+        "ELASTIC_APM_SERVICE_NAME": {
+            "description": "See https://www.elastic.co/guide/en/apm/agent/python/current/django-support.html",
             "required": true
         },
-        "DD_ENV": {
-            "description": "See https://app.datadoghq.com/apm/docs?architecture=host-based&language=python",
-            "value": "heroku",
+        "ELASTIC_APM_SECRET_TOKEN": {
+            "description": "See https://www.elastic.co/guide/en/apm/agent/python/current/django-support.html",
             "required": true
         },
-        "DD_LOGS_INJECTION": {
-            "description": "See https://app.datadoghq.com/apm/docs?architecture=host-based&language=python",
-            "value": true,
+        "ELASTIC_APM_ENVIRONMENT": {
+            "description": "See https://www.elastic.co/guide/en/apm/agent/python/current/django-support.html",
             "required": true
-        },
-        "DD_API_KEY": {
-            "description": "See https://docs.datadoghq.com/agent/basic_agent_usage/heroku/",
-            "required": true
-        },
-        "DD_AGENT_MAJOR_VERSION": {
-            "description": "See https://docs.datadoghq.com/agent/basic_agent_usage/heroku/",
-            "value": 7,
-            "required": true
-        },
-        "DD_DYNO_HOST": {
-            "description": "See https://docs.datadoghq.com/agent/basic_agent_usage/heroku/",
-            "value": true,
-            "required": true
-        },
-        "DD_SITE": {
-            "description": "See https://docs.datadoghq.com/agent/basic_agent_usage/heroku/",
-            "value": "datadoghq.eu.",
-            "required": false
-        },
-        "DD_PYTHON_VERSION": {
-            "description": "See https://docs.datadoghq.com/agent/basic_agent_usage/heroku/",
-            "value": "3",
-            "required": false
         }
     },
     "addons": [
@@ -65,9 +38,6 @@
         }
     ],
     "buildpacks": [
-        {
-            "url": "https://github.com/DataDog/heroku-buildpack-datadog.git"
-        },
         {
             "url": "https://github.com/yunojuno/python-poetry-buildpack.git"
         },

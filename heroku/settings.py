@@ -22,6 +22,7 @@ INSTALLED_APPS = (
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.admin",
+    "elasticapm.contrib.django",
     "demo",
 )
 
@@ -77,3 +78,15 @@ LOGGING = {
 }
 
 TEMPLATE_DEBUG = DEBUG = bool(os.getenv("DJANGO_DEBUG", 0))
+
+# === ELASTIC_APM settings ===
+
+ELASTIC_APM = {
+    "SERVICE_URL": os.getenv("ELASTIC_APM_SERVER_URL"),
+    "SERVICE_NAME": os.getenv("ELASTIC_APM_SERVICE_NAME"),
+    "SECRET_TOKEN": os.getenv("ELASTIC_APM_SECRET_TOKEN"),
+    "ENVIRONMENT": os.getenv("ELASTIC_APM_ENVIRONMENT"),
+    # this must only be used in DEMO mode
+    "DEBUG": os.getenv("ELASTIC_APM_DEBUG"),
+}
+ELASTIC_APM_ENABLED = all(ELASTIC_APM.values())
