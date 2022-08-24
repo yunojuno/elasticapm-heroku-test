@@ -1,0 +1,78 @@
+{
+    "name": "Heroku + Poetry + Django",
+    "description": "An empty Django app to test Heroku deployment issues.",
+    "repository": "https://github.com/yunojuno/heroku-poetry-template",
+    "scripts": {
+        "postdeploy": "python manage.py migrate"
+    },
+    "env": {
+        "DJANGO_SETTINGS_MODULE": {
+            "description": "Location of the settings (fixed)",
+            "value": "heroku.settings",
+            "required": true
+        },
+        "SECRET_KEY": {
+            "generator": "secret"
+        },
+        "APPNAME": {
+            "description": "See https://docs.datadoghq.com/agent/basic_agent_usage/heroku/",
+            "required": true
+        },
+        "DD_SERVICE": {
+            "description": "See https://app.datadoghq.com/apm/docs?architecture=host-based&language=python",
+            "value": "website",
+            "required": true
+        },
+        "DD_ENV": {
+            "description": "See https://app.datadoghq.com/apm/docs?architecture=host-based&language=python",
+            "value": "heroku",
+            "required": true
+        },
+        "DD_LOGS_INJECTION": {
+            "description": "See https://app.datadoghq.com/apm/docs?architecture=host-based&language=python",
+            "value": true,
+            "required": true
+        },
+        "DD_API_KEY": {
+            "description": "See https://docs.datadoghq.com/agent/basic_agent_usage/heroku/",
+            "required": true
+        },
+        "DD_AGENT_MAJOR_VERSION": {
+            "description": "See https://docs.datadoghq.com/agent/basic_agent_usage/heroku/",
+            "value": 7,
+            "required": true
+        },
+        "DD_DYNO_HOST": {
+            "description": "See https://docs.datadoghq.com/agent/basic_agent_usage/heroku/",
+            "value": true,
+            "required": true
+        },
+        "DD_SITE": {
+            "description": "See https://docs.datadoghq.com/agent/basic_agent_usage/heroku/",
+            "value": "datadoghq.eu.",
+            "required": false
+        },
+        "DD_PYTHON_VERSION": {
+            "description": "See https://docs.datadoghq.com/agent/basic_agent_usage/heroku/",
+            "value": "3",
+            "required": false
+        }
+    },
+    "addons": [
+        {
+            "plan": "heroku-postgresql:hobby-dev",
+            "as": "DATABASE"
+        }
+    ],
+    "buildpacks": [
+        {
+            "url": "https://github.com/DataDog/heroku-buildpack-datadog.git"
+        },
+        {
+            "url": "https://github.com/yunojuno/python-poetry-buildpack.git"
+        },
+        {
+            "url": "https://github.com/heroku/heroku-buildpack-python"
+        }
+    ]
+}
