@@ -1,14 +1,11 @@
 [tool.poetry]
-name = "my-app"
-version = "0.1.0"
-description = "Project template for Django app, using Poetry."
+name = "heroku-django-elasticapm"
+version = "0.0.0"
+description = "Demo app for Heroku + Django + Elastic APM."
 license = "MIT"
 authors = ["YunoJuno <code@yunojuno.com>"]
 maintainers = ["YunoJuno <code@yunojuno.com>"]
 readme = "README.md"
-homepage = "https://github.com/yunojuno/poetry-template"
-repository = "https://github.com/yunojuno/poetry-template"
-documentation = "https://github.com/yunojuno/poetry-template"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Environment :: Web Environment",
